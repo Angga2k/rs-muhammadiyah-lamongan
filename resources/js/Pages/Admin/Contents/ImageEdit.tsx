@@ -7,6 +7,7 @@ import { Card, CardHeader, CardTitle, CardContent, CardFooter } from "@/Componen
 import { ArrowLeft, Save, Loader2, CheckCircle, AlertCircle, ImageIcon, Trash2, Plus } from "lucide-react";
 import { Alert, AlertDescription } from "@/Components/ui/alert";
 import { useRef, useState, useEffect } from "react";
+import { APP_CONFIG } from "@/config";
 
 interface ContentImage {
   id: string;
@@ -107,7 +108,6 @@ export default function EditImages({ content }: Props) {
     const formData = new FormData();
     formData.append('_method', 'PUT');
   
-    // Append new images
     data.new_images.forEach((file) => {
       formData.append('new_images[]', file);
     });
@@ -121,7 +121,7 @@ export default function EditImages({ content }: Props) {
       preserveScroll: true,
       onSuccess: () => {
         previewImages.forEach(img => {
-          if (img.file) URL.revokeObjectURL(img.url);
+          if (img.file) URL.revokeObjectURL(APP_CONFIG.API_BASE_URL_ASSETS + img.path);
         });
       },
       onError: (errors) => {
@@ -215,7 +215,7 @@ export default function EditImages({ content }: Props) {
                             src={image.url}
                             alt={`Preview ${index + 1}`}
                             className="rounded-md border w-full aspect-square object-cover"
-                            onLoad={() => image.file && URL.revokeObjectURL(image.url)}
+                            onLoad={() => image.file && URL.revokeObjectURL(APP_CONFIG.API_BASE_URL_ASSETS + image.path)}
                             onError={(e) => {
                               const target = e.target as HTMLImageElement;
                               target.src = '/placeholder-image.jpg';

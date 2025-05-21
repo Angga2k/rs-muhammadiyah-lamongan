@@ -18,6 +18,7 @@ import {
 } from 'lucide-react';
 import LayoutGuest from '@/Layouts/GuestLayout';
 import { useEffect, useState } from 'react';
+import { APP_CONFIG } from '@/config';
 
 const Dashboard = ({
   featuredDoctors,
@@ -111,17 +112,16 @@ const Dashboard = ({
     return timestamp ? timestamp.split('T')[1].substring(0, 5) : '--:--';
   };
 
+  console.log(featuredContents);
+
   return (
     <LayoutGuest user={auth.user}>
-      <Head title="Rumah Sakit Muhammadiyah Lamongan" />
+      <Head title="HOMEPAGE" />
       
-      {/* Hero Section */}
       <section className="relative bg-blue-50 overflow-hidden min-h-[80vh] flex items-center">
-        {/* Background elements */}
         <div className="absolute inset-0 bg-[url('/assets/rumahsakit.webp')] bg-cover bg-center opacity-20"></div>
         <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-blue-800 opacity-20"></div>
         
-        {/* Doctor images - only on desktop */}
         {!isMobile && (
           <>
             <motion.div
@@ -131,9 +131,9 @@ const Dashboard = ({
               className="hidden lg:block absolute right-14 bottom-0 w-1/5 h-full"
             >
               <img 
-                src="/assets/pria.webp" 
+                src={APP_CONFIG.ASSETS_URL + "pria.webp"} 
                 alt="Dokter Pria" 
-                className="w-full h-full object-contain object-bottom"
+                className="w-full h-full object-contain object-center"
                 loading="lazy"
               />
             </motion.div>
@@ -145,16 +145,15 @@ const Dashboard = ({
               className="hidden lg:block absolute left-14 bottom-0 w-1/5 h-full"
             >
               <img 
-                src="/assets/wanita.webp" 
+                src={APP_CONFIG.ASSETS_URL + "wanita.webp"} 
                 alt="Dokter Wanita" 
-                className="w-full h-full object-contain object-bottom"
+                className="w-full h-full object-contain object-center"
                 loading="lazy"
               />
             </motion.div>
           </>
         )}
         
-        {/* Hero content */}
         <div className="container mx-auto px-6 py-24 relative z-10">
           <motion.div
             initial="hidden"
@@ -164,7 +163,7 @@ const Dashboard = ({
           >
             <motion.h1
               variants={item}
-              className="text-4xl md:text-5xl lg:text-6xl font-bold text-blue-900 mb-6"
+              className="text-2xl md:text-xl lg:text-3xl font-bold text-blue-900 mb-6"
             >
               Rumah Sakit Muhammadiyah <span className="text-blue-600">Lamongan</span>
             </motion.h1>
@@ -637,9 +636,10 @@ const Dashboard = ({
                       </div>
 
                       {contentGroups.rules[0].images?.length > 0 && (
+
                         <div className="relative h-auto w-full aspect-video overflow-hidden">
                           <motion.img
-                            src={contentGroups.rules[0].images[0].url}
+                            src={APP_CONFIG.API_BASE_URL_ASSETS + contentGroups.rules[0].images[0].path}
                             alt={contentGroups.rules[0].title || "Tata Tertib Rumah Sakit"}
                             className="w-full h-full object-contain"
                             initial={{ opacity: 0, scale: 1.05 }}
@@ -718,7 +718,7 @@ const Dashboard = ({
                         {contentGroups.map[0].images?.length > 0 && (
                           <>
                             <motion.img
-                              src={contentGroups.map[0].images[0].url}
+                              src={APP_CONFIG.API_BASE_URL_ASSETS + contentGroups.map[0].images[0].path}
                               alt={contentGroups.map[0].title || "Denah Rumah Sakit"}
                               className="w-full h-auto max-h-[800px] object-contain"
                               initial={{ opacity: 0, scale: 1.02 }}
@@ -792,7 +792,7 @@ const Dashboard = ({
 
                           <div className="flex flex-wrap justify-center gap-4">
                             <a
-                              href={contentGroups.map[0].images[0].url}
+                              href={APP_CONFIG.API_BASE_URL_ASSETS + contentGroups.map[0].images[0].path}
                               className="inline-flex items-center px-6 py-3 border border-blue-600 text-base font-medium rounded-full shadow-sm text-blue-600 bg-white hover:bg-blue-50 transition-all duration-300"
                             >
                               <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -833,12 +833,10 @@ const Dashboard = ({
                       viewport={{ once: true }}
                       className="bg-white rounded-2xl shadow-xl overflow-hidden border border-gray-100"
                     >
-                      {contentGroups.handwash[0].image && (
+                      {contentGroups.handwash[0].images && (
                         <div className="relative h-96 overflow-hidden">
                           <motion.img
-                            src={contentGroups.handwash[0].image.startsWith('http') 
-                              ? contentGroups.handwash[0].image 
-                              : `/storage/${contentGroups.handwash[0].image}`}
+                            src={APP_CONFIG.API_BASE_URL_ASSETS + contentGroups.handwash[0].images[0].path}
                             alt={contentGroups.handwash[0].title}
                             className="w-full h-full object-contain"
                             initial={{ opacity: 0 }}
@@ -928,7 +926,7 @@ const Dashboard = ({
             
             <div className="flex flex-col sm:flex-row justify-center gap-4">
               <motion.a
-                href="/jadwal-dokter"
+                href="/jadwal-dokter/hari-ini"
                 className="bg-white text-blue-700 hover:bg-blue-50 font-bold py-3 px-8 rounded-full text-lg transition-all duration-300 inline-flex items-center justify-center"
                 whileHover={{ 
                   scale: 1.05,

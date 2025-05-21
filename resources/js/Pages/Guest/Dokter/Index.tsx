@@ -2,6 +2,7 @@ import { Head, Link } from '@inertiajs/react';
 import { PageProps } from '@/Types/types';
 import GuestLayout from '@/Layouts/GuestLayout';
 import { Input } from '@/Components/ui/input';
+import {APP_CONFIG} from '@/config';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/Components/ui/select';
 import { Button } from '@/Components/ui/button';
 import { Card, CardContent, CardFooter, CardHeader } from '@/Components/ui/card';
@@ -63,7 +64,6 @@ export default function DoctorIndex({ doctors: allDoctors, specializations, auth
             case 'name_desc':
                 result.sort((a, b) => b.name.localeCompare(a.name));
                 break;
-            // default: no sorting
         }
 
         return result;
@@ -221,12 +221,12 @@ export default function DoctorIndex({ doctors: allDoctors, specializations, auth
                                         <CardHeader className="p-0 relative">
                                             <div className="h-48 overflow-hidden rounded-t-lg relative">
                                                 <img
-                                                    src={doctor.photo ? `/storage/${doctor.photo}` : '/images/doctor-placeholder.jpg'}
+                                                    src={APP_CONFIG.API_BASE_URL_ASSETS +  `${doctor.photo}`}
                                                     alt={`Foto Dr. ${doctor.name}`}
                                                     className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                                                     onError={(e) => {
                                                         const target = e.target as HTMLImageElement;
-                                                        target.src = '/images/doctor-placeholder.jpg';
+                                                        target.src = APP_CONFIG.ASSETS_URL + '/avatar.jpg';
                                                     }}
                                                 />
                                             </div>
@@ -324,7 +324,6 @@ export default function DoctorIndex({ doctors: allDoctors, specializations, auth
                     </div>
                 )}
 
-                {/* Empty State */}
                 <AnimatePresence>
                     {filteredDoctors.length === 0 && !isLoading && (
                         <motion.div

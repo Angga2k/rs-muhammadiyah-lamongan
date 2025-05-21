@@ -105,7 +105,6 @@ class ContentController extends Controller
             $currentImages = array_values($currentImages);
         }
 
-        // Handle new images
         $newImages = [];
         if ($request->hasFile('new_images')) {
             foreach ($request->file('new_images') as $file) {
@@ -151,7 +150,6 @@ class ContentController extends Controller
             $currentImages = array_values($currentImages);
         }
 
-        // Handle new images
         $newImages = [];
         if ($request->hasFile('new_images')) {
             foreach ($request->file('new_images') as $file) {

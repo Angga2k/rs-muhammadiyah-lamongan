@@ -4,7 +4,7 @@ import { ClipboardList, Map, Hand, BookOpen, Stethoscope, Clock, UserRound, Cale
 import { Button } from "@/Components/ui/button";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/Components/ui/table";
 import { Badge } from "@/Components/ui/badge";
-import { Link } from "@inertiajs/react";
+import { Head, Link } from "@inertiajs/react";
 
 interface Props {
   latestContents: {
@@ -78,12 +78,10 @@ export default function Dashboard({
     other: { title: "Lainnya", icon: ClipboardList }
   };
 
-  // Format time from HH:MM:SS to HH:MM
   const formatTime = (timeString: string) => {
     return timeString?.substring(0, 5) || '--:--';
   };
 
-  // Get latest content for each type
   const getLatestContentByType = (type: string) => {
     return latestContents.find(content => content.type === type);
   };
@@ -92,6 +90,7 @@ export default function Dashboard({
     <AdminLayout breadcrumbs={[
       { label: "Dashboard", href: "/admin/dashboard" },
     ]}>
+      <Head title="Back Dashboard" />
       <div className="space-y-6">
 
         {/* Content Management */}

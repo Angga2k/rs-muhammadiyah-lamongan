@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { GalleryVerticalEnd, Lock, User } from "lucide-react";
 import { LoginForm } from "@/Components/Guest/Login/LoginForm";
 import { Avatar, AvatarFallback, AvatarImage } from "@/Components/ui/avatar";
+import { Head } from "@inertiajs/react";
 
 export default function Login() {
   // Animation variants
@@ -32,6 +33,7 @@ export default function Login() {
 
   return (
     <div className="flex h-screen w-full overflow-hidden">
+      <Head title="Login" />
       <motion.div
         initial="hidden"
         animate="show"

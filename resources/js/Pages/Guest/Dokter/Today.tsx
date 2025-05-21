@@ -5,6 +5,7 @@ import { PageProps } from '@/Types/types';
 import { route } from 'ziggy-js';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useState, useEffect } from 'react';
+import { APP_CONFIG } from '@/config';
 
 interface Schedule {
   day: string;
@@ -148,7 +149,7 @@ export default function DoctorToday({ doctors, today, auth }: DoctorTodayProps) 
                       <div className="p-6">
                         <div className="flex items-start space-x-4">
                           <motion.img 
-                            src={`/storage/${doctor.photo}`} 
+                            src={APP_CONFIG.API_BASE_URL_ASSETS + `${doctor.photo}`} 
                             alt={`Foto ${doctor.name}`}
                             className="w-20 h-20 rounded-full object-cover border-2 border-blue-100"
                             width={80}

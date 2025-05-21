@@ -12,6 +12,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/Components/ui/avatar";
 import { useEffect } from "react";
 import { TimeRangePicker } from "@/Components/Admin/Doctors/DoctorTimePicker";
 import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectScrollDownButton, SelectScrollUpButton, SelectTrigger, SelectValue } from "@/Components/ui/select";
+import { APP_CONFIG } from "@/config";
 
 interface Doctor {
   id: number;
@@ -134,7 +135,7 @@ export default function Edit({ doctor }: Props) {
                   <div className="relative group">
                     <Avatar className="h-24 w-24 transition-all duration-300 group-hover:ring-4 group-hover:ring-primary/20">
                       <AvatarImage 
-                        src={doctor.photo ? `/storage/${doctor.photo}` : undefined} 
+                        src={APP_CONFIG.API_BASE_URL_ASSETS + doctor.photo}
                         alt={data.name}
                         className="object-cover"
                       />

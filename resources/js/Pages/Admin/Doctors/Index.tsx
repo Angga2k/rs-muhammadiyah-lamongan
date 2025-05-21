@@ -14,6 +14,7 @@ import { useState } from "react";
 import { Loader2 } from "lucide-react";
 import { Dialog, DialogTrigger, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter, DialogClose } from "@/Components/ui/dialog";
 import { Avatar, AvatarFallback, AvatarImage } from "@/Components/ui/avatar";
+import { APP_CONFIG } from "@/config";
 
 interface Doctor {
   id: number;
@@ -139,7 +140,7 @@ export default function Index({ doctors, filters }: Props) {
                         <Avatar className="h-9 w-9">
                             {doctor.photo ? (
                               <AvatarImage 
-                                src={`/storage/${doctor.photo}`} 
+                                src={APP_CONFIG.API_BASE_URL_ASSETS +`${doctor.photo}`} 
                                 alt={doctor.name}
                                 className="object-cover"
                               />

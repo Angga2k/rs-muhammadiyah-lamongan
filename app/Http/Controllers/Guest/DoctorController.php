@@ -43,7 +43,7 @@ class DoctorController extends Controller
                 'id' => $doctor->id,
                 'name' => $doctor->name,
                 'specialization' => $doctor->specialization,
-                'photo' => $doctor->photo ? asset('storage/' . $doctor->photo) : asset('images/doctor-placeholder.jpg'),
+                'photo' => $doctor->photo,
                 'phone' => $doctor->phone,
                 'schedule' => $doctor->schedule,
                 'schedule_display' => $doctor->schedule_display,

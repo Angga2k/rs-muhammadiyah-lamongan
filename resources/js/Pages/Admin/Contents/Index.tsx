@@ -5,7 +5,7 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 import { Pagination } from "@/Components/ui/pagination";
 import { Badge } from "@/Components/ui/badge";
 import { ClipboardList, Map, Hand, BookOpen, Edit, Trash2, PlusCircle, Search, Image as ImageIcon } from "lucide-react";
-import { Link, router } from "@inertiajs/react";
+import { Head, Link, router } from "@inertiajs/react";
 import { route } from "ziggy-js";
 import { Card, CardHeader, CardTitle, CardContent, CardFooter } from "@/Components/ui/card";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/Components/ui/tooltip";
@@ -14,6 +14,7 @@ import { useState } from "react";
 import { Loader2 } from "lucide-react";
 import { Dialog, DialogTrigger, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter } from "@/Components/ui/dialog";
 import { HoverCard, HoverCardContent, HoverCardTrigger } from "@/Components/ui/hover-card";
+import { APP_CONFIG } from "@/config";
 
 interface Content {
   id: number;
@@ -99,6 +100,8 @@ export default function Index({ contents, filters }: Props) {
     <AdminLayout breadcrumbs={[
       { label: "Content", isCurrent: true },
     ]}>
+      <Head title="Contents" />
+
       <div className="space-y-6">
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
           <div>
@@ -183,7 +186,7 @@ export default function Index({ contents, filters }: Props) {
                             <HoverCardTrigger asChild>
                               <div className="relative group cursor-pointer">
                                 <img
-                                  src={content.images[0].url}
+                                  src={APP_CONFIG.API_BASE_URL_ASSETS + content.images[0].path}
                                   alt={`Thumbnail for ${content.title}`}
                                   className="h-10 w-10 rounded-md object-cover border"
                                 />
@@ -199,7 +202,7 @@ export default function Index({ contents, filters }: Props) {
                                 {content.images.map((image, index) => (
                                   <img
                                     key={index}
-                                    src={image.url}
+                                    src={APP_CONFIG.API_BASE_URL_ASSETS + image.path}
                                     alt={`Content image ${index + 1}`}
                                     className="h-24 w-24 rounded-md object-cover border"
                                   />

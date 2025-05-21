@@ -131,7 +131,7 @@ class DoctorController extends Controller
     {
         try {
             if ($doctor->photo) {
-                Storage::disk('public/')->delete($doctor->photo);
+                Storage::disk('public')->delete($doctor->photo);
             }
 
             $doctor->delete();

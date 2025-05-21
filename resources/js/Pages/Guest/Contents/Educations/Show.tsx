@@ -27,7 +27,6 @@ interface EducationShowProps extends PageProps {
 }
 
 export default function EducationShow({ article, relatedArticles, auth }: EducationShowProps) {
-    // Efek untuk menambahkan styling khusus ke konten CKEditor
     useEffect(() => {
         const styleContent = () => {
             const contentElement = document.querySelector('.ck-content');
@@ -52,13 +51,10 @@ export default function EducationShow({ article, relatedArticles, auth }: Educat
                     );
                 });
                 
-
-                // Style untuk paragraf
                 contentElement.querySelectorAll('p').forEach(p => {
                     p.classList.add('my-4', 'leading-relaxed', 'text-gray-700');
                 });
 
-                // Style untuk heading
                 contentElement.querySelectorAll('h2, h3, h4').forEach(heading => {
                     heading.classList.add('mt-8', 'mb-4', 'font-bold', 'text-gray-900');
                     if (heading.tagName === 'H2') {
